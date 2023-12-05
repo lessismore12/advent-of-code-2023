@@ -27,7 +27,7 @@ public class Day1 {
                 String calibrationValue = myScanner.nextLine();
                 System.out.println(calibrationValue);
                 //int value = Integer.parseInt((getFirstInt(calibrationValue, digitsAsStrings) + String.valueOf(getLastInt(calibrationValue))));
-                System.out.println("value " + getFirstInt(calibrationValue, digitsAsStrings));
+                System.out.println("value " + getLastInt(calibrationValue, digitsAsStrings));
                 totalValue += 0;
             }
         } catch (FileNotFoundException e) {
@@ -54,10 +54,9 @@ public class Day1 {
                            if (calibrationValue.charAt(i + k) == j.charAt(k)) {
                                System.out.println("next letter  : " + j.charAt(k));
                                System.out.println("next letter is the same : " + calibrationValue.charAt(i + k));
-                               System.out.println("calibrationValue.substring(i, j.length()-1) " + calibrationValue.substring(i, j.length()));
                                System.out.println("j " + j);
-                               String substring = calibrationValue.substring(i, j.length() - 1);
-                               System.out.println("calibrationValue.substring(i, j.length()-1).equals(j) " + substring.equals(j.toString()));
+                               String substring = calibrationValue.substring(i, j.length());
+                               System.out.println("calibrationValue.substring(i, j.length()-1).equals(j) " + substring.equals(j));
                                if (substring.equals(j)) {
                                    return digitsAsStrings.get(j);
                                }
@@ -71,7 +70,7 @@ public class Day1 {
         return firstValue;
     }
 
-    public char getLastInt(String calibrationValue) {
+    public char getLastInt(String calibrationValue, Map<String, Character> digitsAsStrings) {
         char lastValue = '0';
         for(int i = calibrationValue.length()-1; i >= 0; i--) {
             boolean flag = Character.isDigit(calibrationValue.charAt(i));
@@ -81,15 +80,32 @@ public class Day1 {
                 break;
             } else {
                 System.out.println("'" + calibrationValue.charAt(i) + "' is a letter");
-               /* for (int j = digitsAsStrings.length - 1; j >= 0; j--)
-                {
-                    if (digitsAsStrings[j].endsWith(String.valueOf(calibrationValue.charAt(i))))
-                    {
-                        System.out.println(digitsAsStrings[j]);
-                        System.out.println("digitsAsStrings[j] : " + digitsAsStrings[j] + "\n" + " String.valueOf(calibrationValue.charAt(i-1))) : " + calibrationValue.charAt(i-1));
-                        if (digitsAsStrings[digitsAsStrings[j].length()-2])
-                        {
-                            System.out.println("layer 2: " + digitsAsStrings[j]);
+                String possibleNumber = "";
+                for (int j = calibrationValue.length()-1; j >= 0; j--) {
+
+                    possibleNumber = possibleNumber.concat(String.valueOf(calibrationValue.charAt(j)));
+                    System.out.println(possibleNumber);
+                }
+                /*for (String j : digitsAsStrings.keySet()) {
+                    //System.out.println("key: " + j + " value: " + digitsAsStrings.get(j));
+                    int iterator = 0;
+                    if (calibrationValue.charAt(calibrationValue.length()-1) == j.charAt(j.length()-1)) {
+                        System.out.println("Both begin with same letter : " + j);
+                        for (int k = calibrationValue.length()-1; k >= 0; k--) {
+                            iterator += 1;
+                            System.out.println("next letter is the same : " + calibrationValue.charAt(k - i));
+                            System.out.println("calibrationValue.charAt(k) : " + calibrationValue.charAt(k));
+                            System.out.println("j.charAt(k) : " + j.charAt(j.length()-iterator));
+                            if (calibrationValue.charAt(k) == j.charAt(j.length()-iterator)) {
+                                System.out.println("next letter  : " + j.charAt(k));
+                                System.out.println("next letter is the same : " + calibrationValue.charAt(k - i));
+                                System.out.println("j " + j);
+                                String substring = calibrationValue.substring(j.length(), i);
+                                System.out.println("calibrationValue.substring(i, j.length()-1).equals(j) " + substring.equals(j));
+                                if (substring.equals(j)) {
+                                    return digitsAsStrings.get(j);
+                                }
+                            }
                         }
                     }
                 }*/
